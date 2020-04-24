@@ -4,7 +4,6 @@
 import os
 import re
 import sys
-import time
 import json
 import argparse
 import platform
@@ -25,7 +24,7 @@ from api import client
 
 client = client.Client()
 is_win = platform.system() == "Windows"
-# OSError sometimes?
+# OSError for some paths?
 if hasattr(sys, "frozen"):
 	os.chdir(os.path.dirname(sys.executable))
 else:
