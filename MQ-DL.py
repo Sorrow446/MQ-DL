@@ -31,7 +31,6 @@ if hasattr(sys, "frozen"):
 else:
 	os.chdir(os.path.dirname(__file__))
 
-
 def title():
 	if is_win:
 		os.system("title MQ-DL R2 (by Sorrow446)")
