@@ -204,10 +204,6 @@ def parse_template(meta):
 		)
 		return "{track_padded}. {track}".format(**meta)
 
-def exist_check(f):
-	if os.path.isfile(f):
-		return True
-
 def sanitize(f):
 	if is_win:
 		return re.sub(r'[\/:*?"><|]', "_", f)
@@ -333,7 +329,7 @@ def main(alb_id, tra_id, num=0):
 		# print(meta)
 		pre_abs = os.path.join(alb_abs, str(num) + ".mq-dl")
 		post_abs = os.path.join(alb_abs, parse_template(meta) + specs['ext'])
-		if exist_check(post_abs):
+		if os.path.isfile(post_abs):
 			print("Track already exists locally.")
 			continue
 		stream_url = client.get_track_stream(specs['brate'], specs['fmt'], 
