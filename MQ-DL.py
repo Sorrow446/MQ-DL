@@ -22,13 +22,16 @@ from requests.exceptions import HTTPError
 # own
 from api import client
 
+
 client = client.Client()
 is_win = platform.system() == "Windows"
-# OSError for some paths?
-if hasattr(sys, "frozen"):
-	os.chdir(os.path.dirname(sys.executable))
-else:
-	os.chdir(os.path.dirname(__file__))
+try:
+	if hasattr(sys, "frozen"):
+		os.chdir(os.path.dirname(sys.executable))
+	else:
+		os.chdir(os.path.dirname(__file__))
+except OSError:
+	pass
 
 def title():
 	if is_win:
