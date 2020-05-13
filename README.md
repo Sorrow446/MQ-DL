@@ -4,7 +4,7 @@ Tool written in Python to download streamable tracks from mora qualitas (モー�
 **People have been seen selling my tools. DO NOT buy them. My tools are free and always will be.**
 
 ![](https://orion.feralhosting.com/sorrow/share/MQ-DL_test_R2.png)
-Rewrite. ![Windows binaries](https://github.com/Sorrow446/MQ-DL/releases)
+Rewrite. [Windows binaries](https://github.com/Sorrow446/MQ-DL/releases)
 
 ```
  _____ _____     ____  __
