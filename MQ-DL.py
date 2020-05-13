@@ -192,8 +192,9 @@ def query_quals(quals):
 		else:
 			want = best_order[best_order.index(want)+1]
 	if orig_want != want:
-		print("Unvailable in your chosen quality. {} will be used "
-			  "instead.".format(want)
+		print(
+			"Unavailable in your chosen quality. {} will be used "
+			"instead.".format(want)
 		)
 	return specs
 
@@ -208,9 +209,9 @@ def parse_template(meta):
 
 def sanitize(f):
 	if is_win:
-		return re.sub(r'[\/:*?"><|]', "_", f)
+		return re.sub(r'[\/:*?"><|]', '_', f)
 	else:
-		return re.sub("/", "_", f)
+		return re.sub('/', '_', f)
 
 def dir_setup(d):
 	if not os.path.isdir(d):
@@ -249,6 +250,7 @@ def download_track(stream_url, specs, title, num, total, pre_abs):
 def write_tags(pre_abs, meta, fmt, cov_abs):
 	if fmt == "FLAC":
 		audio = FLAC(pre_abs)
+		del meta['track_padded']
 		for k, v in meta.items():
 			if v:
 				audio[k] = str(v)
@@ -308,10 +310,10 @@ def download_cov(alb_id, cov_abs):
 		}
 	)
 	r.raise_for_status()
-	with open(cov_abs, "wb") as f:
+	with open(cov_abs, 'wb') as f:
 		f.write(r.content)
 	
-def main(alb_id, tra_id, num=0):
+def main(alb_id, tra_id):
 	alb_src_meta = client.get_album_meta(alb_id, cfg['meta_lang'])
 	tra_src_meta = client.get_track_meta(alb_id, cfg['meta_lang'])
 	total = len(tra_src_meta)
@@ -321,16 +323,14 @@ def main(alb_id, tra_id, num=0):
 	cov_abs = os.path.join(alb_abs, "cover.jpg")
 	dir_setup(alb_abs)
 	print(alb_fol)
-	for track in tra_src_meta:
-		num += 1
+	for num, track in enumerate(tra_src_meta, 1):
 		if not track['isStreamable']:
 			print("Track isn't allowed to be streamed.")
 			continue
 		specs = query_quals(track['formats'] + track['losslessFormats'])
 		meta = parse_meta(track, meta=alb_meta, num=num)
-		# print(meta)
 		pre_abs = os.path.join(alb_abs, str(num) + ".mq-dl")
-		post_abs = os.path.join(alb_abs, parse_template(meta) + specs['ext'])
+		post_abs = os.path.join(alb_abs, sanitize(parse_template(meta)) + specs['ext'])
 		if os.path.isfile(post_abs):
 			print("Track already exists locally.")
 			continue
@@ -356,10 +356,8 @@ if __name__ == "__main__":
 	title()
 	cfg = parse_prefs()
 	auth()
-	num = 0
 	total = len(cfg['url'])
-	for url in cfg['url']:
-		num += 1
+	for num, url in enumerate(cfg['url'], 1):
 		print("\nAlbum {} of {}:".format(num, total))
 		try:
 			alb_art, alb_id, tra_id = check_url(url)
