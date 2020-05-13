@@ -124,7 +124,7 @@ def parse_prefs():
 def check_url(url):
 	regex = (
 		r"https://content.mora-qualitas.com/artist/([a-zA-Z-\d]+)/album/"
-		"(alb.\d{9}|[a-zA-Z-\d]+)(?:/track/(t.\d{9}|[a-zA-Z=\d]+))?"
+		r"(alb.\d{9}|[a-zA-Z-\d]+)(?:/track/(t.\d{9}|[a-zA-Z=\d]+))?"
 	)
 	m = re.match(regex, url)
 	return m.group(1), m.group(2), m.group(3)
