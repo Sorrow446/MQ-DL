@@ -7,7 +7,6 @@ import sys
 import json
 import argparse
 import platform
-import traceback
 
 # 3rd
 import requests
@@ -202,8 +201,9 @@ def parse_template(meta):
 	try:
 		return cfg['fname_template'].format(**meta)
 	except KeyError:
-		print("Failed to parse filename naming template. Default one "
-			  "will be used instead."
+		print(
+			"Failed to parse filename naming template. Default one "
+			"will be used instead."
 		)
 		return "{track_padded}. {track}".format(**meta)
 
