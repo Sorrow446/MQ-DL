@@ -367,6 +367,6 @@ if __name__ == "__main__":
 		alb_id = client.resolve_id(alb_art, alb_id)
 		try:
 			main(alb_id, tra_id)
-		except exception as e:
+		except Exception as e:
 			print("Album failed.")
 			err(e)
