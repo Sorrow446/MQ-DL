@@ -97,7 +97,7 @@ def parse_prefs():
 	)
 	parser.add_argument(
 		"-o", "--output-dir", 
-		action="store_true", default=cfg['output_dir'],
+		default=cfg['output_dir'],
 		help="Abs output directory. Double up backslashes or use single "
 			 "forward slashes for Windows. Default: \MQ-DL downloads"
 	)
