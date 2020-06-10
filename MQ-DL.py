@@ -128,7 +128,7 @@ def check_url(url):
 	m = re.match(regex, url)
 	return m.group(1), m.group(2), m.group(3)
 
-def resolve_ids(alb_art, alb_id):
+def resolve_id(alb_art, alb_id):
 	if "." not in alb_id:
 		alb_id = client.resolve_id(al_art, alb_id)
 	return alb_id
@@ -364,7 +364,7 @@ if __name__ == "__main__":
 		except AttributeError:
 			print("Invalid url:", url)
 			continue
-		alb_id = client.resolve_id(alb_art, alb_id)
+		alb_id = resolve_id(alb_art, alb_id)
 		try:
 			main(alb_id, tra_id)
 		except Exception as e:
