@@ -130,7 +130,7 @@ def check_url(url):
 
 def resolve_ids(alb_art, alb_id):
 	if "." not in alb_id:
-		alb_id = client.resolve_id(al_art, al_id)
+		alb_id = client.resolve_id(al_art, alb_id)
 	return alb_id
 
 def parse_meta(src, meta=None, num=None, total=None):
