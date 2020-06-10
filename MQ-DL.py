@@ -129,9 +129,9 @@ def check_url(url):
 	return m.group(1), m.group(2), m.group(3)
 
 def resolve_ids(alb_art, alb_id):
-	if "." not in al_id:
-		al_id = client.resolve_id(al_art, al_id)
-	return al_id
+	if "." not in alb_id:
+		alb_id = client.resolve_id(al_art, al_id)
+	return alb_id
 
 def parse_meta(src, meta=None, num=None, total=None):
 	# Set tracktotal / num manually in case of disked albums.
