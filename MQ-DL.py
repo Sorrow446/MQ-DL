@@ -25,7 +25,7 @@ from api import client
 client = client.Client()
 is_win = platform.system() == "Windows"
 try:
-	if hasattr(sys, "frozen"):
+	if hasattr(sys, 'frozen'):
 		os.chdir(os.path.dirname(sys.executable))
 	else:
 		os.chdir(os.path.dirname(__file__))
@@ -71,40 +71,40 @@ def parse_prefs():
 	cfg = parse_cfg()
 	parser = argparse.ArgumentParser()
 	parser.add_argument(
-		"-u", "--url", 
-		nargs="+", required=True,
-		help="Multiple links or a text file filename / abs path."
+		'-u', '--url', 
+		nargs='+', required=True,
+		help='Multiple links or a text file filename / abs path.'
 	)
 	parser.add_argument(
-		"-q", "--quality",
+		'-q', '--quality',
 		choices=[1,2,3,4], default=cfg['quality'], type=int,
-		help="1: AAC PLUS, 2: MP3, 3: AAC, 4: best/FLAC."
+		help='1: AAC PLUS, 2: MP3, 3: AAC, 4: best/FLAC.'
 	)
 	parser.add_argument(
-		"-c", "--cover-size", 
+		'-c', '--cover-size', 
 		choices=[1,2,3,4,5], default=cfg['cover_size'], type=int,
-		help="1: 70, 2: 170, 3: 300, 4: 500, 5: 600." 
+		help='1: 70, 2: 170, 3: 300, 4: 500, 5: 600.' 
 	)
 	parser.add_argument(
-		"-t", "--template", 
+		'-t', '--template', 
 		default=cfg['fname_template'],
-		help="Naming template for track filenames."
+		help='Naming template for track filenames.'
 	)
 	parser.add_argument(
-		"-k", "--keep-cover", 
-		action="store_true", default=cfg['keep_cover'],
-		help="Leave albums' covers in their respective folders."
+		'-k', '--keep-cover', 
+		action='store_true', default=cfg['keep_cover'],
+		help='Leave albums\' covers in their respective folders.'
 	)
 	parser.add_argument(
-		"-o", "--output-dir", 
+		'-o', '--output-dir',
 		default=cfg['output_dir'],
-		help="Abs output directory. Double up backslashes or use single "
-			 "forward slashes for Windows. Default: \MQ-DL downloads"
+		help='Abs output directory. Double up backslashes or use single '
+			 'forward slashes for Windows. Default: \MQ-DL downloads'
 	)
 	parser.add_argument(
-		"-l", "--meta-lang",
-		choices=["en-US", "ja-JP"], default=cfg['meta_language'],
-		help="Metadata language."
+		'-l', '--meta-lang',
+		choices=["en-US", 'ja-JP'], default=cfg['meta_language'],
+		help='Metadata language.'
 	)
 	args = vars(parser.parse_args())
 	cfg.update(args)
@@ -122,11 +122,13 @@ def parse_prefs():
 
 def check_url(url):
 	regex = (
-		r'https://content.mora-qualitas.com/artist/([a-zA-Z-\d]+)/album/'
-		r'(alb.\d{9}|[a-zA-Z-\d*]+)(?:/track/(t.\d{9}|[a-zA-Z=\d]+))?'
+		r'https://content.mora-qualitas.com/(?:artist/([a-zA-Z-\d]+)/album/'
+		r'|(?:\?id=))(alb.\d{9}|[a-zA-Z-\d*]+)'
 	)
+	
+	
 	m = re.match(regex, url)
-	return m.group(1), m.group(2), m.group(3)
+	return m.group(1), m.group(2)
 
 def resolve_id(alb_art, alb_id):
 	if "." not in alb_id:
@@ -144,12 +146,12 @@ def parse_meta(src, meta=None, num=None, total=None):
 		#meta['track_padded'] = str(num).zfill(2)
 	else:
 		meta = {
-			"album": src.get('name'),
-			"albumartist": src.get('artistName'),
-			"copyright": src.get('copyright'),
-			"label": src.get('label'),
-			"tracktotal": total,
-			"upc": src.get('upc')
+			'album': src.get('name'),
+			'albumartist': src.get('artistName'),
+			'copyright': src.get('copyright'),
+			'label': src.get('label'),
+			'tracktotal': total,
+			'upc': src.get('upc')
 		}
 		try:
 			meta['year'] = src.get('originallyReleased').split('-')[0]
@@ -175,17 +177,17 @@ def query_quals(quals):
 		if parsed_quals[want]:
 			best = max(parsed_quals[want])
 			ext = {
-				"FLAC": ".flac",
-				"AAC": ".m4a",
-				"MP3": ".mp3",
-				"AAC PLUS": ".m4a"
+				'FLAC': ".flac",
+				'AAC': ".m4a",
+				'MP3': ".mp3",
+				'AAC PLUS': ".m4a"
 			}[want]
 			specs = {
-				"fmt": want,
-				"brate": best[0],
-				"bdepth": best[1], 
-				"srate": best[2],
-				"ext": ext
+				'fmt': want,
+				'brate': best[0],
+				'bdepth': best[1], 
+				'srate': best[2],
+				'ext': ext
 			}
 			break
 		else:
@@ -220,9 +222,9 @@ def dir_setup(d):
 def get_track(stream_url):
 	r = requests.get(stream_url, stream=True, 
 		headers={
-			"Range": "bytes=0-",
-			"User-Agent": client.s.headers['User-Agent'],
-			"Referer": client.s.headers['Referer']
+			'Range': "bytes=0-",
+			'User-Agent': client.s.headers['User-Agent'],
+			'Referer': client.s.headers['Referer']
 		}
 	)
 	r.raise_for_status()
@@ -270,15 +272,15 @@ def write_tags(pre_abs, meta, fmt, cov_abs):
 			encoding=3, text="{}/{}".format(meta['track'], meta['tracktotal'])
 		)
 		legend={
-			"album": id3.TALB,
-			"albumartist": id3.TPE2,
-			"artist": id3.TPE1,
+			'album': id3.TALB,
+			'albumartist': id3.TPE2,
+			'artist': id3.TPE1,
 			#"comment": id3.COMM,
-			"copyright": id3.TCOP,
-			"isrc": id3.TSRC,
-			"label": id3.TPUB,
-			"title": id3.TIT2,
-			"year": id3.TYER
+			'copyright': id3.TCOP,
+			'isrc': id3.TSRC,
+			'label': id3.TPUB,
+			'title': id3.TIT2,
+			'year': id3.TYER
 		}
 		for k, v in meta.items():
 			id3tag = legend.get(k)
@@ -305,15 +307,15 @@ def download_cov(alb_id, cov_abs):
 	url = client.get_cover(alb_id, cfg['cover_size'])
 	r = requests.get(url,
 		headers={
-			"User-Agent": client.s.headers['User-Agent'],
-			"Referer": client.s.headers['Referer']
+			'User-Agent': client.s.headers['User-Agent'],
+			'Referer': client.s.headers['Referer']
 		}
 	)
 	r.raise_for_status()
 	with open(cov_abs, 'wb') as f:
 		f.write(r.content)
 	
-def main(alb_id, tra_id):
+def main(alb_id):
 	alb_src_meta = client.get_album_meta(alb_id, cfg['meta_lang'])
 	tra_src_meta = client.get_track_meta(alb_id, cfg['meta_lang'])
 	total = len(tra_src_meta)
@@ -360,13 +362,13 @@ if __name__ == "__main__":
 	for num, url in enumerate(cfg['url'], 1):
 		print("\nAlbum {} of {}:".format(num, total))
 		try:
-			alb_art, alb_id, tra_id = check_url(url)
+			alb_art, alb_id = check_url(url)
 		except AttributeError:
 			print("Invalid url:", url)
 			continue
 		alb_id = resolve_id(alb_art, alb_id)
 		try:
-			main(alb_id, tra_id)
+			main(alb_id)
 		except Exception as e:
 			print("Album failed.")
 			err(e)
