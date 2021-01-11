@@ -5,6 +5,7 @@ Tool written in Python to download streamable tracks from mora qualitas (モー�
 
 ![](https://orion.feralhosting.com/sorrow/share/MQ-DL_test_R2.png)
 Rewrite. [Windows binaries](https://github.com/Sorrow446/MQ-DL/releases)
+You might also be interested in [MOOV-DL](https://github.com/Sorrow446/MOOV-DL).
 
 ```
  _____ _____     ____  __
