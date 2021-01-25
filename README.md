@@ -4,11 +4,11 @@ Tool written in Python to download streamable tracks from mora qualitas (モー�
 **People have been seen selling my tools. DO NOT buy them. My tools are free and always will be.**
 
 ![](https://i.imgur.com/iCrOETB.png)
-Rewrite. [Windows binaries](https://github.com/Sorrow446/MQ-DL/releases)
+[Windows binaries](https://github.com/Sorrow446/MQ-DL/releases)
 You might also be interested in [MOOV-DL](https://github.com/Sorrow446/MOOV-DL).
 
 ```
-_____ _____     ____  __
+ _____ _____     ____  __
 |     |     |___|    \|  |
 | | | |  |  |___|  |  |  |__
 |_|_|_|__  _|   |____/|_____|
