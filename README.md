@@ -1,11 +1,32 @@
 # MQ-DL
 Tool written in Python to download streamable tracks from mora qualitas (モーラクオリタス).    
-
 **People have been seen selling my tools. DO NOT buy them. My tools are free and always will be.**
 
 ![](https://i.imgur.com/iCrOETB.png)
 [Windows binaries](https://github.com/Sorrow446/MQ-DL/releases)
 You might also be interested in [MOOV-DL](https://github.com/Sorrow446/MOOV-DL).
+
+## Supported Media
+|Type|URL example|
+| --- | --- |
+|Album|`https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan/album/neo-neo-ep`
+|Artist|`https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan`
+|Favourites|`https://content.mora-qualitas.com/favorites`
+|Playlist|`https://content.mora-qualitas.com/playlist/pp.543884501`
+|Track|`https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan/album/neo-neo-ep/track/t.533232673`
+|User playlist|`https://content.mora-qualitas.com/playlist/mp.280976624`
+
+## Usage Examples
+Download a single track.    
+`mq-dl.py/mq-dl_x86.exe -u https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan/album/neo-neo-ep/track/t.533232673`
+
+Download from two lists and favourited tracks.    
+`mq-dl.py/mq-dl_x86.exe -u E:/urls.txt G:/urls_2.txt https://content.mora-qualitas.com/favorites`
+
+Download a playlist and an artist's discography.    
+`mq-dl.py/mq-dl_x86.exe https://content.mora-qualitas.com/playlist/pp.543884501 https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan`
+
+You can mix all media types. Duplicate URLs and text files will be filtered.
 
 ```
  _____ _____     ____  __
@@ -37,16 +58,6 @@ optional arguments:
                         Metadata language. 1 = English, 2 = Japanese.
 ```
 
-## Supported Media
-|Type|URL example|
-| --- | --- |
-|Album|`https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan/album/neo-neo-ep`
-|Artist|`https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan`
-|Favourites|`https://content.mora-qualitas.com/favorites`
-|Playlist|`https://content.mora-qualitas.com/playlist/pp.543884501`
-|Track|`https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan/album/neo-neo-ep/track/t.533232673`
-|User playlist|`https://content.mora-qualitas.com/playlist/mp.280976624`
-
 ## Config
 |Option|Info|
 | --- | --- |
@@ -67,3 +78,5 @@ optional arguments:
 |media_types\album\folder_template|Folder name for album media type. Blank = no folder. Available variables: album, albumartist, copyright, label, tracktotal, upc
 |media_types\playlist\folder_template|Folder name for playlist media type. Blank = no folder. Available variables: id, name
 |media_types\user_playlist\folder_template|Folder name for user playlist media type. Blank = no folder. Available variables: id, name
+
+Any of the same specified CLI arguments will override your config file.
