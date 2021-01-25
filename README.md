@@ -65,7 +65,7 @@ optional arguments:
 |output_dir|Where to download to. You must double up your backslashes or use single forward slashes instead.
 |quality|Track quality to request from the API. 1: AAC PLUS, 2: MP3, 3: AAC, 4: best/FLAC.
 |cover_size|Cover size to fetch. 1: 70, 2: 170, 3: 300, 4: 500, 5: 600.
-|fname_template|Filename template for tracks. Available variables: artist, isrc, title, track, trackpadded, album, albumartist, copyright, label, tracktotal, upc
+|fname_template|Filename template for tracks. Available variables: artist, isrc, title, track, trackpadded, album, albumartist, copyright, label, tracktotal, upc, year
 |keep_cover|Keep cover in album folder. Does not apply to playlists or favourites.
 |meta_language|Language of metadata to request from the API. 1 = English, 2 = Japanese.
 |media_types\artist\folder_template|Folder template for artist media type. Blank = no folder. Available variables: artist.
@@ -73,8 +73,8 @@ optional arguments:
 |media_types\artist\compilations|Include compilation albums in artist media type.
 |media_types\artist\singles_and_eps|Include singles and EPs in artist media type.
 |media_types\favourites\folder_name|Folder name for favourites media type. Blank = no folder.
-|media_types\track\folder_template|Folder template for track media type. Blank = no folder. Available variables: album, albumartist, copyright, label, tracktotal, upc
-|media_types\album\folder_template|Folder name for album media type. Blank = no folder. Available variables: album, albumartist, copyright, label, tracktotal, upc
+|media_types\track\folder_template|Folder template for track media type. Blank = no folder. Available variables: album, albumartist, copyright, label, tracktotal, upc, year
+|media_types\album\folder_template|Folder name for album media type. Blank = no folder. Available variables: album, albumartist, copyright, label, tracktotal, upc, year
 |media_types\playlist\folder_template|Folder name for playlist media type. Blank = no folder. Available variables: id, name
 |media_types\user_playlist\folder_template|Folder name for user playlist media type. Blank = no folder. Available variables: id, name
 
