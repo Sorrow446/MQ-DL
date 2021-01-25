@@ -1,7 +1,6 @@
 # MQ-DL
 Tool written in Python to download streamable tracks from mora qualitas (モーラクオリタス).    
 **People have been seen selling my tools. DO NOT buy them. My tools are free and always will be.**
-
 ![](https://i.imgur.com/iCrOETB.png)
 [Windows binaries](https://github.com/Sorrow446/MQ-DL/releases)
 You might also be interested in [MOOV-DL](https://github.com/Sorrow446/MOOV-DL).
