@@ -6,5 +6,28 @@
     "cover_size": 5,
     "fname_template": "{track_padded}. {title}",
     "keep_cover": true,
-    "meta_language": "en-US" 
+    "meta_language": 1,
+	"media_types": {
+		"artist": {
+			"folder_template": "{artist} discography",
+			"albums": true,
+			"compilations": false,
+			"singles_and_eps": true
+		},
+		"favourites": {
+			"folder_name": "Favourites"
+		},
+		"track": {
+			"folder_template": "{albumartist} - {album}"
+		},
+		"album": {
+			"folder_template": "{albumartist} - {album}"
+		},
+		"playlist": {
+			"folder_template": "{name}_{id}"
+		},
+		"user_playlist": {
+			"folder_template": "{name}_{id}"
+		}
+	}
 }
