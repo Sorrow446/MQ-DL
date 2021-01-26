@@ -4,7 +4,7 @@
     "output_dir": "",
     "quality": 4,
     "cover_size": 5,
-    "fname_template": "{track_padded}. {title}",
+    "fname_template": "{trackpadded}. {title}",
     "keep_cover": true,
     "meta_language": 1,
 	"media_types": {
