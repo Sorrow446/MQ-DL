@@ -23,7 +23,7 @@ Download from two lists and favourited tracks.
 `mq-dl.py/mq-dl_x86.exe -u E:/urls.txt G:/urls_2.txt https://content.mora-qualitas.com/favorites`
 
 Download a playlist and an artist's discography.    
-`mq-dl.py/mq-dl_x86.exe https://content.mora-qualitas.com/playlist/pp.543884501 https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan`
+`mq-dl.py/mq-dl_x86.exe -u https://content.mora-qualitas.com/playlist/pp.543884501 https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan`
 
 You can mix all media types. Duplicate URLs and text files will be filtered.
 
