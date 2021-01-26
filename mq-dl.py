@@ -106,7 +106,6 @@ def get_artist_meta(art_id):
 	return art_meta['name'], alb_ids
 
 def parse_prefs():
-	proc_urls = []
 	cfg = parse_cfg()
 	parser = argparse.ArgumentParser()
 	parser.add_argument(
