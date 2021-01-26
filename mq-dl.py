@@ -35,25 +35,27 @@ def parse_cfg():
 	with open('config.json') as f:
 		return json.load(f)
 
-def read_txt(urls):
-	all_urls = []
-	txt_paths = []
-	for url in urls:
-		if url.endswith('.txt') and url not in txt_paths:
-			with open(url) as f:
-				all_urls.extend(f.readlines())
-			txt_paths.append(url)
-		else:
-			all_urls.append(url)
-	return all_urls
+def read_txt(txt_path):
+	with open(txt_path) as f:
+		return f.readlines()
 
 def process_urls(urls):
 	all_fixed = []
-	urls = read_txt(urls)
+	txt_paths = []
+	fix = lambda x : x.strip().split('?type')[0]
 	for url in urls:
-		fixed = url.strip().split('?type')[0]
-		if not fixed in all_fixed:
-			all_fixed.append(fixed)
+		if url.endswith('.txt'):
+			if url in txt_paths:
+				continue
+			for txt_url in read_txt(url):
+				fixed = fix(txt_url)
+				if not fixed in all_fixed:
+					all_fixed.append(fixed)
+			txt_paths.append(url)
+		else:
+			fixed = fix(url)
+			if not fixed in all_fixed:
+				all_fixed.append(fixed)
 	return all_fixed
 
 def process_cfg(cfg):
@@ -75,7 +77,19 @@ def process_cfg(cfg):
 	cfg['urls'] = process_urls(cfg['urls'])
 	return cfg
 
-def resolve_id(alb_art, alb_shcut=None, tra_shcut=None):
+def resolve_ids(match, groups_len):
+	alb_art = None
+	alb_shcut = None
+	tra_shcut = None
+	if groups_len == 1:
+		alb_art = match.group(1)
+	elif groups_len == 2:
+		alb_art = match.group(1)
+		alb_shcut = match.group(2)
+	elif groups_len == 3:
+		alb_art = match.group(1)
+		alb_shcut = match.group(2)
+		tra_shcut = match.group(3)
 	return client.resolve_id(alb_art, alb_shcut=alb_shcut, tra_shcut=tra_shcut)
 
 def get_artist_meta(art_id):
@@ -139,8 +153,8 @@ def parse_prefs():
 def check_url(url):
 	url_types = [
 		# regex | url type | at least one resolve needed
-		(r'https://content.mora-qualitas.com/members/[a-zA-Z-\d]+/favorites$()', 'favourites', False),
-		(r'https://content.mora-qualitas.com/favorites$()', 'favourites', False),
+		(r'https://content.mora-qualitas.com/members/[a-zA-Z-\d]+/favorites$', 'favourites', False),
+		(r'https://content.mora-qualitas.com/favorites$', 'favourites', False),
 		(r'https://content.mora-qualitas.com/\?id=(alb.\d+)$', 'album', False),
 		(r'https://content.mora-qualitas.com/artist/(art.\d+)$', 'artist', False),
 		(r'https://content.mora-qualitas.com/artist/([a-zA-Z-\d]+)$', 'artist', True),
@@ -156,15 +170,14 @@ def check_url(url):
 		match = re.match(url_type[0], url, re.IGNORECASE)
 		if not match:
 			continue
+		groups_len = len(match.groups())
 		if url_type[2] == True:
-			if url_type[1] == "album":
-				_id = resolve_id(match.group(1), alb_shcut=match.group(2))
-			elif url_type[1] == "track":
-				_id = resolve_id(match.group(1), alb_shcut=match.group(2), tra_shcut=match.group(3))
-			else:
-				_id = resolve_id(match.group(1))
+			_id = resolve_ids(match, groups_len)
 		else:
-			_id = match.group(1)
+			if groups_len == 0:
+				_id = None
+			else:
+				_id = match.group(groups_len)
 		media_type = url_type[1]
 		break
 	if match:
@@ -347,7 +360,7 @@ def iter_track(tra_src_meta, alb_path, total, cov_path, alb_id=None, cov=True, a
 		if n == -1:
 			print("Track {} of {}:".format(num, total))
 		else:
-			print("Track 1 of 1:")
+			#print("Track 1 of 1:")
 			num = n
 		try:
 			if not track['isStreamable']:
