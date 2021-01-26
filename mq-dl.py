@@ -441,7 +441,7 @@ def track(tra_id):
 	alb_meta = parse_meta(alb_src_meta, total=total)
 	print("{} - {}".format(tra_src_meta['artistName'], tra_src_meta['name']))
 	template = parse_template(
-		alb_meta, cfg['media_types']['track']['folder_template'], '{album_artist} - {album}')
+		alb_meta, cfg['media_types']['track']['folder_template'], '{albumartist} - {album}')
 	tra_path = os.path.join(cfg['output_dir'], template)
 	cov_path = os.path.join(tra_path, 'cover.jpg')
 	dir_setup(tra_path)
