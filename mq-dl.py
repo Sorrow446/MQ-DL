@@ -362,7 +362,7 @@ def iter_track(tra_src_meta, alb_path, total, cov_path, alb_id=None, cov=True, a
 			#print("Track 1 of 1:")
 			num = n
 		try:
-			if not track['isStreamable']:
+			if track['isStreamable'] == False:
 				print('Track isn\'t allowed to be streamed.')
 				continue
 			specs = query_quals(track['formats'] + track['losslessFormats'])
