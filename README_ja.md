@@ -17,8 +17,10 @@
 ## 使用例
 トラックをダウンロードする。    
 `mq-dl.py/mq-dl_x86.exe -u https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan/album/neo-neo-ep/track/t.533232673`
+
 ２つのリストからとお気に入りのトラックをダウンロードする。    
 `mq-dl.py/mq-dl_x86.exe -u E:/urls.txt G:/urls_2.txt https://content.mora-qualitas.com/favorites`
+
 プレイリストとアーティストのディスコグラフィーをダウンロードする。    
 `mq-dl.py/mq-dl_x86.exe -u https://content.mora-qualitas.com/playlist/pp.543884501 https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan`
 
