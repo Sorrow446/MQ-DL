@@ -12,7 +12,7 @@
 |お気に入り|`https://content.mora-qualitas.com/favorites`
 |プレイリスト|`https://content.mora-qualitas.com/playlist/pp.543884501`
 |トラック|`https://content.mora-qualitas.com/artist/ryukku-to-soine-gohan/album/neo-neo-ep/track/t.533232673`
-|ユーザープのレイリスト|`https://content.mora-qualitas.com/playlist/mp.280976624`
+|ユーザープレイリスト|`https://content.mora-qualitas.com/playlist/mp.280976624`
 
 ## 使用例
 トラックをダウンロードする。    
